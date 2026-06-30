@@ -1,0 +1,23 @@
+
+# === FILE 10: render.yaml (Configurazione per Render) ===
+render_yaml = '''services:
+  - type: web
+    name: webcam-recorder
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_PASSWORD
+        generateValue: true  # Render genera una password casuale sicura
+    disk:
+      name: uploads
+      mountPath: /opt/render/project/src/uploads
+      sizeGB: 1
+'''
+
+with open(f"{base_dir}/render.yaml", "w") as f:
+    f.write(render_yaml)
+
+print("✅ Creato: render.yaml")

@@ -1,0 +1,85 @@
+
+# === FILE 6: public/admin/index.html (Pannello Admin) ===
+admin_html = '''<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔐 Pannello Admin - Video</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Login Screen -->
+    <div id="login-screen" class="step active">
+      <div class="login-box">
+        <div class="icon">🔐</div>
+        <h2>Accesso Admin</h2>
+        <p>Inserisci la password per accedere ai video</p>
+        <input 
+          type="password" 
+          id="admin-password" 
+          placeholder="Password..."
+          autocomplete="off"
+        >
+        <button id="btn-login" class="btn btn-primary" style="width: 100%;">
+          Accedi
+        </button>
+        <p id="login-error" style="color: var(--error); margin-top: 15px; display: none;">
+          Password errata
+        </p>
+      </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="step">
+      <div class="admin-header">
+        <h1>🎥 Video Registrati</h1>
+        <button id="btn-logout" class="btn btn-secondary btn-small">
+          🚪 Esci
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="number" id="stat-total">0</div>
+          <div class="label">Video Totali</div>
+        </div>
+        <div class="stat-card">
+          <div class="number" id="stat-today">0</div>
+          <div class="label">Oggi</div>
+        </div>
+        <div class="stat-card">
+          <div class="number" id="stat-size">0 MB</div>
+          <div class="label">Spazio Usato</div>
+        </div>
+      </div>
+
+      <!-- Video Grid -->
+      <div id="video-grid" class="video-grid"></div>
+      
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <div class="icon">📭</div>
+        <h3>Nessun video</h3>
+        <p>I video registrati appariranno qui</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal per video a schermo intero -->
+  <div id="video-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center;">
+    <video id="modal-video" controls style="max-width: 90%; max-height: 90%; border-radius: 12px;"></video>
+    <button id="btn-close-modal" style="position: absolute; top: 20px; right: 20px; background: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer;">✕</button>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
+'''
+
+with open(f"{base_dir}/public/admin/index.html", "w") as f:
+    f.write(admin_html)
+
+print("✅ Creato: public/admin/index.html")

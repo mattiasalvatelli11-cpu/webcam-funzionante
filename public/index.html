@@ -1,0 +1,116 @@
+
+# === FILE 3: public/index.html (Pagina registrazione) ===
+index_html = '''<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🎥 Registra un Video</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>🎥 Registra il tuo Video</h1>
+      <p class="subtitle">Usa la webcam del tuo telefono o del computer</p>
+    </header>
+
+    <!-- Stato iniziale: richiesta permessi -->
+    <div id="step-permission" class="step active">
+      <div class="permission-box">
+        <div class="icon">📹</div>
+        <h2>Permesso Camera</h2>
+        <p>Per registrare un video, devi consentire l'accesso alla fotocamera.</p>
+        <button id="btn-start-camera" class="btn btn-primary btn-large">
+          📷 Avvia Fotocamera
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Anteprima video -->
+    <div id="step-preview" class="step">
+      <div class="video-wrapper">
+        <video id="preview-video" autoplay playsinline muted></video>
+        <div class="video-overlay">
+          <div class="recording-badge hidden" id="recording-badge">
+            <span class="dot"></span> REC
+          </div>
+          <div class="timer" id="timer">00:00</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="btn-record" class="btn btn-record">
+          <span class="record-icon"></span>
+        </button>
+        <button id="btn-stop" class="btn btn-stop hidden">
+          <span class="stop-icon"></span>
+        </button>
+      </div>
+      <p class="hint">Tocca il pulsante rosso per iniziare a registrare</p>
+    </div>
+
+    <!-- Step 3: Anteprima registrazione + invio -->
+    <div id="step-review" class="step">
+      <h2>📼 Anteprima Registrazione</h2>
+      <div class="video-wrapper review-wrapper">
+        <video id="review-video" controls playsinline></video>
+      </div>
+      
+      <div class="action-buttons">
+        <button id="btn-retry" class="btn btn-secondary">
+          🔄 Nuova Registrazione
+        </button>
+        <button id="btn-send" class="btn btn-primary">
+          📤 Invia Video
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 4: Caricamento -->
+    <div id="step-uploading" class="step">
+      <div class="upload-status">
+        <div class="spinner"></div>
+        <h2>📤 Caricamento in corso...</h2>
+        <p id="upload-progress">0%</p>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5: Successo -->
+    <div id="step-success" class="step">
+      <div class="success-box">
+        <div class="icon success-icon">✅</div>
+        <h2>Video Inviato!</h2>
+        <p>Il tuo video è stato inviato con successo.</p>
+        <button id="btn-new-video" class="btn btn-primary">
+          🎥 Registra un altro video
+        </button>
+      </div>
+    </div>
+
+    <!-- Errore -->
+    <div id="step-error" class="step">
+      <div class="error-box">
+        <div class="icon error-icon">❌</div>
+        <h2>Errore</h2>
+        <p id="error-message">Qualcosa è andato storto.</p>
+        <button id="btn-retry-error" class="btn btn-primary">
+          🔄 Riprova
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
+'''
+
+with open(f"{base_dir}/public/index.html", "w") as f:
+    f.write(index_html)
+
+print("✅ Creato: public/index.html")

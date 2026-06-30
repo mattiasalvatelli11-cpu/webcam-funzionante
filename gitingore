@@ -1,0 +1,13 @@
+
+# === FILE 8: .gitignore ===
+gitignore = '''node_modules/
+uploads/
+videos.json
+.env
+.DS_Store
+*.log
+npm-debug.log*
+'''
+
+with open(f"{base_dir}/.gitignore", "w") as f:
+    f.write(gitignore)
