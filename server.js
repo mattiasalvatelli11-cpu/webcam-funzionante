@@ -1,6 +1,4 @@
-
-# === FILE 2: server.js (Backend Express) ===
-server_js = '''const express = require('express');
+const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const path = require('path');
@@ -56,17 +54,17 @@ const upload = multer({
 
 // === ROUTES ===
 
-// 📹 Pagina principale (registrazione)
+// Pagina principale (registrazione)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// 🔐 Pagina admin
+// Pagina admin
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin', 'index.html'));
 });
 
-// 📤 Upload video
+// Upload video
 app.post('/api/upload', upload.single('video'), (req, res) => {
   try {
     if (!req.file) {
@@ -86,7 +84,7 @@ app.post('/api/upload', upload.single('video'), (req, res) => {
 
     // Salva nel database JSON
     const videos = JSON.parse(fs.readFileSync(VIDEOS_FILE, 'utf8'));
-    videos.unshift(videoData); // Aggiunge in cima (più recente prima)
+    videos.unshift(videoData);
     fs.writeFileSync(VIDEOS_FILE, JSON.stringify(videos, null, 2));
 
     res.json({ 
@@ -101,7 +99,7 @@ app.post('/api/upload', upload.single('video'), (req, res) => {
   }
 });
 
-// 📋 Lista video (protetta da password semplice via query param)
+// Lista video (protetta da password)
 app.get('/api/videos', (req, res) => {
   const password = req.headers['x-admin-password'] || req.query.password;
   
@@ -117,7 +115,7 @@ app.get('/api/videos', (req, res) => {
   }
 });
 
-// 🗑️ Elimina video
+// Elimina video
 app.delete('/api/videos/:id', (req, res) => {
   const password = req.headers['x-admin-password'] || req.query.password;
   
@@ -145,27 +143,21 @@ app.delete('/api/videos/:id', (req, res) => {
 
     res.json({ success: true, message: 'Video eliminato' });
   } catch (error) {
-    res.status(500).json({ error: 'Errore durante l\\'eliminazione' });
+    res.status(500).json({ error: 'Errore durante l\'eliminazione' });
   }
 });
 
-// ❌ Gestione errori
+// Gestione errori
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: err.message || 'Errore server' });
 });
 
-// 🚀 Avvio server
+// Avvio server
 app.listen(PORT, () => {
-  console.log(`\\n🎥 Webcam Recorder avviato!`);
+  console.log('\n🎥 Webcam Recorder avviato!');
   console.log(`📱 Pagina registrazione: http://localhost:${PORT}`);
   console.log(`🔐 Pannello admin: http://localhost:${PORT}/admin`);
-  console.log(`\\n⚙️  Password admin: ${ADMIN_PASSWORD}`);
-  console.log(`   (Puoi cambiarla impostando la variabile ADMIN_PASSWORD)\\n`);
+  console.log(`\n⚙️  Password admin: ${ADMIN_PASSWORD}`);
+  console.log('   (Puoi cambiarla impostando la variabile ADMIN_PASSWORD)\n');
 });
-'''
-
-with open(f"{base_dir}/server.js", "w") as f:
-    f.write(server_js)
-
-print("✅ Creato: server.js")
