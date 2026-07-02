@@ -1,6 +1,4 @@
-
-# === FILE 1: package.json ===
-package_json = '''{
+{
   "name": "webcam-recorder",
   "version": "1.0.0",
   "description": "Sito di registrazione webcam con pannello admin",
@@ -22,9 +20,3 @@ package_json = '''{
     "node": ">=18.0.0"
   }
 }
-'''
-
-with open(f"{base_dir}/package.json", "w") as f:
-    f.write(package_json)
-
-print("✅ Creato: package.json")
